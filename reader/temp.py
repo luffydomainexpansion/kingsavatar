@@ -1,14 +1,24 @@
 import os
+from bs4 import BeautifulSoup
+import json
 
-folder = "static/chapters"
+# Set the path manually
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # reader folder
+nav_path = os.path.join(BASE_DIR, 'static', 'chapters', 'nav.xhtml')
+json_path = os.path.join(BASE_DIR, 'static', 'chapters', 'chapters.json')
 
-for filename in os.listdir(folder):
-    if filename.endswith(".xhtml"):
-        path = os.path.join(folder, filename)
-        with open(path, "r", encoding="utf-8") as f:
-            text = f.read()
-        text = text.replace('href="style/chapter.css"', 'href="/static/chapters/style/chapter.css"')
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(text)
+chapters = []
+with open(nav_path, 'r', encoding='utf-8') as f:
+    soup = BeautifulSoup(f, 'lxml')
+    for li in soup.find_all('li'):
+        a = li.find('a')
+        if a:
+            href = a['href']
+            text = a.get_text(strip=True)
+            chap_number = int(href.replace('chap_', '').replace('.xhtml',''))
+            chapters.append({'number': chap_number, 'title': text, 'href': href})
 
-print("Fixed all CSS paths!")
+with open(json_path, 'w', encoding='utf-8') as f:
+    json.dump(chapters, f, ensure_ascii=False, indent=2)
+
+print(f"Saved {len(chapters)} chapters to {json_path}")

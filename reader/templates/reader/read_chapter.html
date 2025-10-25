@@ -3,24 +3,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chapter {{ chapter }}</title>
-    <link rel="stylesheet" href="{% static 'chapters/style/chapter.css' %}">
+    <title>Chapter {{ chapter_number }}</title>
+    <link rel="stylesheet" href="{% static 'style/chapter.css' %}">
+    <script src="{% static 'script/theme.js' %}" defer></script>
 </head>
-<body>
-    <div class="chapter-content">
-        {{ content|safe }}
+<body class="dark-theme">
+
+<div class="chapter-content">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>Chapter {{ chapter_number }}</h2>
+        
+        <div>
+            <label for="chapterDropdown">Jump to: </label>
+            <select id="chapterDropdown" onchange="goToChapter(this)">
+                {% for i in chapters %}
+                    <option value="{{ i }}" {% if i == chapter_number %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+
+            <button id="themeToggle">🌙 Dark Mode</button>
+        </div>
     </div>
 
-    <div style="margin-top:20px; display:flex; justify-content:space-between;">
-        {% if chapter > 1 %}
-            <a href="/chapter/{{ chapter|add:"-1" }}">← Previous</a>
+    <hr>
+
+    <div>{{ chapter_content|safe }}</div>
+
+    <div class="nav-buttons">
+        {% if prev_chapter %}
+            <a href="{% url 'read_chapter' chapter_number=prev_chapter %}">← Previous</a>
         {% else %}
             <span></span>
         {% endif %}
-        
-        {% if chapter < 1729 %}
-            <a href="/chapter/{{ chapter|add:"1" }}">Next →</a>
+
+        {% if next_chapter %}
+            <a href="{% url 'read_chapter' chapter_number=next_chapter %}">Next →</a>
         {% endif %}
     </div>
+</div>
+
+<script>
+function goToChapter(select) {
+    const chapter = select.value;
+    window.location.href = `/chapter/${chapter}/`;
+}
+</script>
+
 </body>
 </html>

@@ -1,0 +1,178 @@
+body {
+    font-family: 'Open Sans', 'SF Pro Text', 'SF Pro Icons', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfdfd;
+    color: #222;
+    line-height: 1.8;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Container to keep text centered and readable */
+.chapter-content {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Default headings (light theme) */
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3 {
+    color: #222; /* dark/black for light background */
+}
+
+/* Dark theme headings */
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3 {
+    color: #e9d768; /* golden/yellow for dark background */
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    transition: color 0.3s;
+}
+
+/* Paragraphs */
+p {
+    font-size: 17px;
+    margin-bottom: 1.2em;
+}
+
+/* Simple navigation buttons */
+.nav-buttons {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.nav-buttons a {
+    text-decoration: none;
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.nav-buttons a:hover {
+    background: #0056b3;
+}
+
+/* Light Theme */
+body.light-theme {
+    background-color: #fdfdfd;
+    color: #222;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #181a1b;
+    color: #e6e6e6;
+}
+
+/* Start button */
+.start-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.start-button:hover {
+    background: #0056b3;
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+    margin-left: 10px;
+}
+
+#themeToggle:hover {
+    background-color: #0056b3;
+}
+
+/* Chapter Dropdown */
+#chapterDropdown {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #fff;
+    color: #222;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+/* Optional spacing to keep things aligned */
+.chapter-content > div > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+body.dark-theme #chapterDropdown:hover {
+    background-color: #3a3a3a;
+}
+
+/* Chapter Dropdown */
+#chapterDropdown {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #fff;
+    color: #222;
+    transition: background-color 0.3s, color 0.3s;
+    max-height: 200px; /* optional max height when many chapters */
+    overflow-y: auto;
+}
+
+/* Dark mode */
+body.dark-theme #chapterDropdown {
+    background-color: #2b2b2b;
+    color: #e6e6e6;
+    border: 1px solid #555;
+}
+
+/* Hide default scrollbar in Webkit browsers */
+#chapterDropdown::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chapterDropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#chapterDropdown::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 4px;
+}
+
+#chapterDropdown::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3;
+}
+
+/* Firefox scrollbar (optional) */
+#chapterDropdown {
+    scrollbar-width: thin;
+    scrollbar-color: #007bff transparent;
+}

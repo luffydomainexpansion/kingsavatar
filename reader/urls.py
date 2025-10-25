@@ -2,5 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('chapter/<int:number>/', views.read_chapter, name='read_chapter'),
+    path('', views.home, name='home'),
+    path('chapter/<int:chapter_number>/', views.read_chapter, name='read_chapter'),
 ]
+

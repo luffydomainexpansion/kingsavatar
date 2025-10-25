@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The King's Avatar - Reader</title>
+    <link rel="stylesheet" href="{% static 'style/chapter.css' %}">
+    <style>
+        /* Grid container for chapters */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .chapter-grid li {
+            background-color: #f1f1f1;
+            padding: 10px 12px;
+            border-radius: 6px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .chapter-grid li a {
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+        }
+
+        .chapter-grid li:hover {
+            background-color: #007bff;
+            transform: translateY(-2px);
+        }
+
+        .chapter-grid li:hover a {
+            color: white;
+        }
+
+        /* Dark mode overrides */
+        body.dark-theme .chapter-grid li {
+            background-color: #2b2b2b;
+        }
+
+        body.dark-theme .chapter-grid li a {
+            color: #e6e6e6;
+        }
+
+        body.dark-theme .chapter-grid li:hover {
+            background-color: #0056b3;
+        }
+
+        body.dark-theme .chapter-grid li:hover a {
+            color: #fff;
+        }
+
+        /* "View All" button styling */
+        .view-all-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .view-all-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="chapter-content" style="text-align: center;">
+        <h1>The King's Avatar</h1>
+        <p>Read The King's Avatar web novel (all chapters available)</p>
+
+        <form action="{% url 'read_chapter' chapter_number=1 %}">
+            <button type="submit" class="start-button">Start Reading</button>
+        </form>
+
+        <hr>
+
+        <h2>Chapters</h2>
+        <ul class="chapter-grid">
+            {% for chap in chapters %}
+                <li>
+                    <a href="{% url 'read_chapter' chapter_number=chap.number %}">
+                        {{ chap.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if not show_all and total_chapters > initial_count %}
+            <form method="get">
+                <input type="hidden" name="all" value="1">
+                <button type="submit" class="view-all-button">View All Chapters</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
