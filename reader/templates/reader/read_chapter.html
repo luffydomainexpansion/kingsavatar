@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter {{ chapter }}</title>
+    <link rel="stylesheet" href="{% static 'chapters/style/chapter.css' %}">
+</head>
+<body>
+    <div class="chapter-content">
+        {{ content|safe }}
+    </div>
+
+    <div style="margin-top:20px; display:flex; justify-content:space-between;">
+        {% if chapter > 1 %}
+            <a href="/chapter/{{ chapter|add:"-1" }}">← Previous</a>
+        {% else %}
+            <span></span>
+        {% endif %}
+        
+        {% if chapter < 1729 %}
+            <a href="/chapter/{{ chapter|add:"1" }}">Next →</a>
+        {% endif %}
+    </div>
+</body>
+</html>
