@@ -1,4 +1,4 @@
 # kingsavatar
 
-# for demo
-# visit: https://kingsavatar.onrender.com/
+for demo
+visit: https://kingsavatar.onrender.com/
